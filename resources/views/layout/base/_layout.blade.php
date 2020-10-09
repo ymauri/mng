@@ -52,7 +52,7 @@
     @endif
 
     @if (config('layout.extras.user.layout') == 'offcanvas')
-        @include('layout.partials.extras.offcanvas._quick-user')
+        @include('layout.partials.extras.offcanvas._quick-simple-user')
     @endif
 
     @if (config('layout.extras.quick-panel.display'))
