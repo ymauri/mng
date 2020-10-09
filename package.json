@@ -111,9 +111,12 @@
     },
     "devDependencies": {
         "axios": "^0.19",
+        "bootstrap": "^4.0.0",
         "cross-env": "^7.0",
+        "jquery": "^3.2",
         "laravel-mix": "^5.0.5",
         "lodash": "^4.17.20",
+        "popper.js": "^1.12",
         "replace-in-file-webpack-plugin": "^1.0.6",
         "resolve-url-loader": "^3.1.0",
         "sass": "^1.26.9",

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'PagesController@index');
+Route::get('', function () {
+    if (Auth::user()) {
+        return redirect("home");
+    }
+    return redirect('login');
+});
+
+Route::get('/', 'PagesController@index')->middleware(['web', 'auth'])->name('home');
 
 
 // Demo routes
@@ -29,3 +37,12 @@ Route::get('/icons/svg', 'PagesController@svg');
 
 // Quick search dummy route to display html elements in search dropdown (header search)
 Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
+
+// Route::get('/login', 'Auth\LoginController@login')->name('login');
+// Route::post('/login', 'Auth\LoginController@authenticate')->name('authenticate');
+// Route::post('/logout', 'Auth\LoginController@logout')->middleware(['web', 'auth'])->name('logout');
+// Route::post('/register', 'Auth\RegisterController@register');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
