@@ -41,7 +41,7 @@
                                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <span></span>Remember me</label>
                             </div>
-                                @if (Route::has('password.request'))
+                            @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
@@ -51,7 +51,7 @@
                         <button id="kt_login_signin_submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">Sign In</button>
                         <div class="mt-10">
                             <span class="opacity-70 mr-4">Don't have an account yet?</span>
-                            <a href="javascript:;" id="kt_login_signup" class="text-muted text-hover-primary font-weight-bold">Sign Up!</a>
+                            <a href="{{route("register")}}" id="kt_login_signup" class="text-muted text-hover-primary font-weight-bold">Sign Up!</a>
                         </div>
                     </form>
                 </div>
