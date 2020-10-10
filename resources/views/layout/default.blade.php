@@ -65,6 +65,8 @@ License: You must have a valid license purchased only from themeforest(the above
         {{-- Includable JS --}}
         @yield('scripts')
 
+        @include('layout.base._toastr')
+
     </body>
 </html>
 
