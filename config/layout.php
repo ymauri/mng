@@ -115,7 +115,7 @@ return [
         'display' => true,
         'displayDesc' => true,
         'layout' => 'subheader-v1',
-        'fixed' => true,
+        'fixed' => false,
         'width' => 'fluid', // fixed, fluid
         'clear' => false,
         'layouts' => [
@@ -124,7 +124,7 @@ return [
             'subheader-v3' => 'Subheader v3',
             'subheader-v4' => 'Subheader v4',
         ],
-        'style' => 'solid' // transparent, solid. can be transparent only if 'fixed' => false
+        'style' => 'transparent' // transparent, solid. can be transparent only if 'fixed' => false
     ],
 
     // Content
@@ -177,7 +177,7 @@ return [
 
         // Search
         'search' => [
-            'display' => true,
+            'display' => false,
             'layout' => 'dropdown', // offcanvas, dropdown
             'offcanvas' => [
                 'direction' => 'right'
@@ -186,7 +186,7 @@ return [
 
         // Notifications
         'notifications' => [
-            'display' => true,
+            'display' => false,
             'layout' => 'dropdown', // offcanvas, dropdown
             'dropdown' => [
                 'style' => 'dark' // light|dark
@@ -198,7 +198,7 @@ return [
 
         // Quick Actions
         'quick-actions' => [
-            'display' => true,
+            'display' => false,
             'layout' => 'dropdown', // offcanvas, dropdown
             'dropdown' => [
                 'style' => 'dark' // light|dark
@@ -222,12 +222,12 @@ return [
 
         // Languages
         'languages' => [
-            'display' => true
+            'display' => false
         ],
 
         // Cart
         'cart' => [
-            'display' => true,
+            'display' => false,
             'dropdown' => [
                 'style' => 'dark' // light|dark
             ]
@@ -235,7 +235,7 @@ return [
 
         // Quick Panel
         'quick-panel' => [
-            'display' => true,
+            'display' => false,
             'offcanvas' => [
                 'direction' => 'right'
             ]
@@ -243,12 +243,12 @@ return [
 
         // Chat
         'chat' => [
-            'display' => true,
+            'display' => false,
         ],
 
         // Page Toolbar
         'toolbar' => [
-            'display' => true
+            'display' => false
         ],
 
         // Scrolltop

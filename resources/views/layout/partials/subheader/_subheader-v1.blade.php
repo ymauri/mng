@@ -21,7 +21,7 @@
 
 				{{-- Breadcrumb --}}
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2">
-                    <li class="breadcrumb-item"><a href="#"><i class="flaticon2-shelter text-muted icon-1x"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{{route("home")}}"><i class="flaticon2-shelter text-muted icon-1x"></i></a></li>
                     @foreach ($page_breadcrumbs as $k => $item)
 						<li class="breadcrumb-item">
                         	<a href="{{ url($item['page']) }}" class="text-muted">
@@ -40,12 +40,11 @@
                 @section('page_toolbar')
             @endif
 
-            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+            {{-- <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
                 <a href="#" class="btn btn-icon"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{ Metronic::getSVG("media/svg/icons/Files/File-plus.svg", "svg-icon-success svg-icon-2x") }}
                 </a>
                 <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-                    {{-- Navigation --}}
                     <ul class="navi navi-hover">
                         <li class="navi-header font-weight-bold">
                             Jump to:
@@ -86,7 +85,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
     </div>
