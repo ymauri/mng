@@ -41,7 +41,21 @@
                     <input id="password-confirm" type="password" class="form-control form-control-solid" name="password_confirmation" autocomplete="new-password" placeholder="Confirm Password" @empty($user) required @endempty>
                     <span class="form-text text-muted">Repeat the previous password</span>
                 </div>
+                @if (!empty($user) && $user->id == Auth::user()->id)
+                    <input name="role" value="{{$user->roles()->first()->id}}" type="hidden">
+                @else
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select name='role' id="role" class="form-control form-control-solid">
+                            @foreach ($roles as $role)
+                                <option value="{{$role->id}}" @if (!empty($user) && $role->id == $user->roles()->first()->id ) selected @endif>{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                        <span class="form-text text-muted">Select a role for this user</span>
+                    </div>
+                @endif
             </div>
+
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 <a type="button" href="{{route('user.index')}}" class="btn btn-secondary">Cancel</a>

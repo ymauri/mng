@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -61,7 +62,8 @@ class UserController extends Controller
      */
     public function add()
     {
-        return view('user.form');
+        $roles = Role::all();
+        return view('user.form', compact('roles'));
     }
 
     /**
@@ -77,13 +79,16 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'role' => ['required', "integer"]
             ]);
 
-            User::create([
+            $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
+            $role = Role::findById($data['role']);
+            $user->assignRole($role->name);
 
             flash(__("Success. User created."), 'success');
             return redirect(route('user.index'));
@@ -124,7 +129,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.form', compact('user'));
+        $roles = Role::all();
+        return view('user.form', compact('user', 'roles'));
     }
 
     /**
@@ -141,6 +147,7 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+                'role' => ['required', "integer"]
             ]);
             $user->name = $data['name'];
             $user->email = $data['email'];
@@ -148,6 +155,14 @@ class UserController extends Controller
                 $user->password = Hash::make($data['password']);
             }
             $user->save();
+            if (Auth::user()->id != $user->id) {
+                $oldRole = $user->roles()->first();
+                $user->removeRole($oldRole->name);
+
+                $currentRole = Role::findById((int) $data['role']);
+                $user->assignRole($currentRole->name);
+            }
+
             flash(__("Success. User updated."), 'success');
             return redirect(route('user.index'));
         } catch (Exception $e) {
