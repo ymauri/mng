@@ -41,23 +41,23 @@ Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search')
 Auth::routes();
 
 // Manage User
-Route::name('user.')->prefix('user')->group(function () {
-    Route::get('/', 'UserController@index')->name('index');
-    Route::post('/dt', 'UserController@dt')->name('datatable');
-    Route::get('/add', 'UserController@add')->name('add');
-    Route::post('/create', 'UserController@create')->name('create');
-    Route::post('/delete/{user}', 'UserController@delete')->name('delete');
-    Route::get('/edit/{user}', 'UserController@edit')->name('edit');
-    Route::post('/update/{user}', 'UserController@update')->name('update');
+Route::name('user.')->middleware(['auth'])->prefix('user')->group(function () {
+    Route::get('/', 'UserController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'UserController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/add', 'UserController@add')->name('add')->middleware('permission:configuration');
+    Route::post('/create', 'UserController@create')->name('create')->middleware('permission:configuration');
+    Route::post('/delete/{user}', 'UserController@delete')->name('delete')->middleware('permission:configuration');
+    Route::get('/edit/{user}', 'UserController@edit')->name('edit')->middleware('permission:configuration');
+    Route::post('/update/{user}', 'UserController@update')->name('update')->middleware('permission:configuration');
 });
 
 // Manage Role
-Route::name('role.')->prefix('role')->group(function () {
-    Route::get('/', 'RoleController@index')->name('index');
-    Route::post('/dt', 'RoleController@dt')->name('datatable');
-    Route::get('/add', 'RoleController@add')->name('add');
-    Route::post('/create', 'RoleController@create')->name('create');
-    Route::post('/delete/{role}', 'RoleController@delete')->name('delete');
-    Route::get('/edit/{role}', 'RoleController@edit')->name('edit');
-    Route::post('/update/{role}', 'RoleController@update')->name('update');
+Route::name('role.')->middleware(['auth'])->prefix('role')->group(function () {
+    Route::get('/', 'RoleController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'RoleController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/add', 'RoleController@add')->name('add')->middleware('permission:configuration');
+    Route::post('/create', 'RoleController@create')->name('create')->middleware('permission:configuration');
+    Route::post('/delete/{role}', 'RoleController@delete')->name('delete')->middleware('permission:configuration');
+    Route::get('/edit/{role}', 'RoleController@edit')->name('edit')->middleware('permission:configuration');
+    Route::post('/update/{role}', 'RoleController@update')->name('update')->middleware('permission:configuration');
 });
