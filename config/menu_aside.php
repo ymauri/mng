@@ -22,32 +22,11 @@ return [
                     'title' => 'Users',
                     'bullet' => 'dot',
                     'page' => '/user'
-                    // 'submenu' => [
-                    //     [
-                    //         'title' => 'List - Default',
-                    //         'page' => 'test',
-                    //     ],
-                    //     [
-                    //         'title' => 'List - Datatable',
-                    //         'page' => 'custom/apps/user/list-datatable'
-                    //     ],
-                    //     [
-                    //         'title' => 'List - Columns 1',
-                    //         'page' => 'custom/apps/user/list-columns-1'
-                    //     ],
-                    //     [
-                    //         'title' => 'List - Columns 2',
-                    //         'page' => 'custom/apps/user/list-columns-2'
-                    //     ],
-                    //     [
-                    //         'title' => 'Add User',
-                    //         'page' => 'custom/apps/user/add-user'
-                    //     ],
-                    //     [
-                    //         'title' => 'Edit User',
-                    //         'page' => 'custom/apps/user/edit-user'
-                    //     ],
-                    // ]
+                ],
+                [
+                    'title' => 'Roles',
+                    'bullet' => 'dot',
+                    'page' => '/role'
                 ],
             ]
         ],

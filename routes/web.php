@@ -50,3 +50,14 @@ Route::name('user.')->prefix('user')->group(function () {
     Route::get('/edit/{user}', 'UserController@edit')->name('edit');
     Route::post('/update/{user}', 'UserController@update')->name('update');
 });
+
+// Manage Role
+Route::name('role.')->prefix('role')->group(function () {
+    Route::get('/', 'RoleController@index')->name('index');
+    Route::post('/dt', 'RoleController@dt')->name('datatable');
+    Route::get('/add', 'RoleController@add')->name('add');
+    Route::post('/create', 'RoleController@create')->name('create');
+    Route::post('/delete/{role}', 'RoleController@delete')->name('delete');
+    Route::get('/edit/{role}', 'RoleController@edit')->name('edit');
+    Route::post('/update/{role}', 'RoleController@update')->name('update');
+});
