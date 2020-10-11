@@ -90,15 +90,25 @@ var MNGUser = function() {
     let deleteUser = function() {
         $('body').on('click', '.delete-user', function(e) {
             e.preventDefault();
-            $.post(`user/delete/${$(this).data('id')}`, function(response) {
-                let messageType = 'error';
-                if (response.status == "OK") {
-                    messageType = 'success';
-                } else if (response.status == "WARNING") {
-                    messageType = 'warning';
+            Swal.fire({
+                title: 'Do you want to delete this user?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: `Save`,
+                denyButtonText: `Cancel`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    return $.post(`user/delete/${$(this).data('id')}`, function(response) {
+                        let messageType = 'error';
+                        if (response.status == "OK") {
+                            messageType = 'success';
+                        } else if (response.status == "WARNING") {
+                            messageType = 'warning';
+                        }
+                        MNG.flash(response.message, messageType);
+                        datatable.reload();
+                    });
                 }
-                MNG.flash(response.message, messageType);
-                datatable.reload();
             });
         });
     };
