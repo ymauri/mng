@@ -38,11 +38,15 @@ Route::get('/icons/svg', 'PagesController@svg');
 // Quick search dummy route to display html elements in search dropdown (header search)
 Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search');
 
-// Route::get('/login', 'Auth\LoginController@login')->name('login');
-// Route::post('/login', 'Auth\LoginController@authenticate')->name('authenticate');
-// Route::post('/logout', 'Auth\LoginController@logout')->middleware(['web', 'auth'])->name('logout');
-// Route::post('/register', 'Auth\RegisterController@register');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Manage User
+Route::name('user.')->prefix('user')->group(function () {
+    Route::get('/', 'UserController@index')->name('index');
+    Route::post('/dt', 'UserController@dt')->name('datatable');
+    Route::get('/add', 'UserController@add')->name('add');
+    Route::post('/create', 'UserController@create')->name('create');
+    Route::post('/delete/{user}', 'UserController@delete')->name('delete');
+    Route::get('/edit/{user}', 'UserController@edit')->name('edit');
+    Route::post('/update/{user}', 'UserController@update')->name('update');
+});

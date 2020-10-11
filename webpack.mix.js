@@ -16,7 +16,11 @@ const rimraf = require('rimraf');
  */
 
 // Default
-mix.js('resources/js/app.js', 'public/js').scripts('resources/js/config.js', 'public/js/config.js').sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/app.js', 'public/js')
+    .scripts('resources/js/config.js', 'public/js/config.js')
+    .scripts('resources/js/user/user.js', 'public/js/user/user.js')
+    .scripts('resources/js/helpers.js', 'public/js/helpers.js')
+    .sass('resources/sass/app.scss', 'public/css');
 
 // Global jquery
 // mix.autoload({
@@ -26,17 +30,17 @@ mix.js('resources/js/app.js', 'public/js').scripts('resources/js/config.js', 'pu
 
 // 3rd party plugins css/js
 mix.sass('resources/plugins/plugins.scss', 'public/plugins/global/plugins.bundle.css').then(() => {
-    // remove unused preprocessed fonts folder
-    rimraf(path.resolve('public/fonts'), () => {});
-    rimraf(path.resolve('public/images'), () => {});
-}).sourceMaps(!mix.inProduction())
+        // remove unused preprocessed fonts folder
+        rimraf(path.resolve('public/fonts'), () => {});
+        rimraf(path.resolve('public/images'), () => {});
+    }).sourceMaps(!mix.inProduction())
     // .setResourceRoot('./')
-    .options({processCssUrls: false}).js(['resources/plugins/plugins.js'], 'public/plugins/global/plugins.bundle.js');
+    .options({ processCssUrls: false }).js(['resources/plugins/plugins.js'], 'public/plugins/global/plugins.bundle.js');
 
 // Metronic css/js
 mix.sass('resources/metronic/sass/style.scss', 'public/css/style.bundle.css', {
-    sassOptions: {includePaths: ['node_modules']},
-})
+        sassOptions: { includePaths: ['node_modules'] },
+    })
     // .options({processCssUrls: false})
     .js('resources/js/scripts.js', 'public/js/scripts.bundle.js');
 
@@ -70,45 +74,42 @@ mix.copyDirectory('resources/metronic/media', 'public/media');
 
 mix.webpackConfig({
     plugins: [
-        new ReplaceInFileWebpackPlugin([
-            {
-                // rewrite font paths
-                dir: path.resolve('public/plugins/global'),
-                test: /\.css$/,
-                rules: [
-                    {
-                        // fontawesome
-                        search: /url\((\.\.\/)?webfonts\/(fa-.*?)"?\)/g,
-                        replace: 'url(./fonts/@fortawesome/$2)',
-                    },
-                    {
-                        // flaticon
-                        search: /url\(("?\.\/)?font\/(Flaticon\..*?)"?\)/g,
-                        replace: 'url(./fonts/flaticon/$2)',
-                    },
-                    {
-                        // flaticon2
-                        search: /url\(("?\.\/)?font\/(Flaticon2\..*?)"?\)/g,
-                        replace: 'url(./fonts/flaticon2/$2)',
-                    },
-                    {
-                        // keenthemes fonts
-                        search: /url\(("?\.\/)?(Ki\..*?)"?\)/g,
-                        replace: 'url(./fonts/keenthemes-icons/$2)',
-                    },
-                    {
-                        // lineawesome fonts
-                        search: /url\(("?\.\.\/)?fonts\/(la-.*?)"?\)/g,
-                        replace: 'url(./fonts/line-awesome/$2)',
-                    },
-                    {
-                        // socicons
-                        search: /url\(("?\.\.\/)?font\/(socicon\..*?)"?\)/g,
-                        replace: 'url(./fonts/socicon/$2)',
-                    },
-                ],
-            },
-        ]),
+        new ReplaceInFileWebpackPlugin([{
+            // rewrite font paths
+            dir: path.resolve('public/plugins/global'),
+            test: /\.css$/,
+            rules: [{
+                    // fontawesome
+                    search: /url\((\.\.\/)?webfonts\/(fa-.*?)"?\)/g,
+                    replace: 'url(./fonts/@fortawesome/$2)',
+                },
+                {
+                    // flaticon
+                    search: /url\(("?\.\/)?font\/(Flaticon\..*?)"?\)/g,
+                    replace: 'url(./fonts/flaticon/$2)',
+                },
+                {
+                    // flaticon2
+                    search: /url\(("?\.\/)?font\/(Flaticon2\..*?)"?\)/g,
+                    replace: 'url(./fonts/flaticon2/$2)',
+                },
+                {
+                    // keenthemes fonts
+                    search: /url\(("?\.\/)?(Ki\..*?)"?\)/g,
+                    replace: 'url(./fonts/keenthemes-icons/$2)',
+                },
+                {
+                    // lineawesome fonts
+                    search: /url\(("?\.\.\/)?fonts\/(la-.*?)"?\)/g,
+                    replace: 'url(./fonts/line-awesome/$2)',
+                },
+                {
+                    // socicons
+                    search: /url\(("?\.\.\/)?font\/(socicon\..*?)"?\)/g,
+                    replace: 'url(./fonts/socicon/$2)',
+                },
+            ],
+        }, ]),
     ],
 });
 
