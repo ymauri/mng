@@ -22,10 +22,10 @@
                     {{ Auth::user()->name }}
 				</a>
                 <div class="text-muted mt-1">
-                    Pendiente el Rol
+                    {{ Auth::user()->roles()->first()->name }}
                 </div>
                 <div class="navi mt-2">
-                    <a href="#" class="navi-item">
+                    <a href="mailto:{{ Auth::user()->email }}" class="navi-item">
                         <span class="navi-link p-0 pb-2">
                             <span class="navi-icon mr-1">
 								{{ Metronic::getSVG("media/svg/icons/Communication/Mail-notification.svg", "svg-icon-lg svg-icon-primary") }}
