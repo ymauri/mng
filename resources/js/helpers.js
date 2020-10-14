@@ -36,7 +36,12 @@ window.MNG = function() {
         }
     }
 
+    let __ = function(text) {
+        return i18n.hasOwnProperty(text.toLowerCase()) ? i18n[text.toLowerCase()] : text;
+    };
+
     return {
         flash: flash,
+        __: __
     };
 }();
