@@ -61,3 +61,15 @@ Route::name('role.')->middleware(['auth'])->prefix('role')->group(function () {
     Route::get('/edit/{role}', 'RoleController@edit')->name('edit')->middleware('permission:configuration');
     Route::post('/update/{role}', 'RoleController@update')->name('update')->middleware('permission:configuration');
 });
+
+// Manage Staff
+Route::name('staff.')->middleware(['auth'])->prefix('staff')->group(function () {
+    Route::get('/', 'WorkerController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'WorkerController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/add', 'WorkerController@add')->name('add')->middleware('permission:configuration');
+    Route::post('/create', 'WorkerController@create')->name('create')->middleware('permission:configuration');
+    Route::post('/delete/{worker}', 'WorkerController@delete')->name('delete')->middleware('permission:configuration');
+    Route::get('/edit/{worker}', 'WorkerController@edit')->name('edit')->middleware('permission:configuration');
+    Route::post('/update/{worker}', 'WorkerController@update')->name('update')->middleware('permission:configuration');
+});
+

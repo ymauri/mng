@@ -28,6 +28,11 @@ return [
                     'bullet' => 'dot',
                     'page' => '/role'
                 ],
+                [
+                    'title' => 'Staff',
+                    'bullet' => 'dot',
+                    'page' => '/staff'
+                ],
             ]
         ],
         // [
