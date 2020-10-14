@@ -38,7 +38,7 @@ class WorkerController extends Controller
     public function dt(Request $request)
     {
         $str = !empty($request->input('query')) ? $request->input('query')['name'] : "";
-        $query = Worker::where("isactive", 1);
+        $query = Worker::query();
         if (!empty($str)) {
             $query->whereRaw("name LIKE '%$str%'")
                   ->orWhereRaw("position LIKE '%$str%'");
@@ -68,7 +68,7 @@ class WorkerController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'position' => ['required', "string"]
             ]);
-            $data['isactive'] = true;
+            $data['isactive'] = !empty($data['isactive']);
             Worker::create($data);
 
             flash(__("Success. Staff member created."), 'success');

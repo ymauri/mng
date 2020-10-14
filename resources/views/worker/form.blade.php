@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label>Name</label>
                     <input id="name" type="text" class="form-control form-control-solid @error('name') is-invalid @enderror" name="name" value="{{ !empty($worker) ? $worker->name : old("name") }}" required autocomplete="name" autofocus placeholder="Name">
-                    <span class="form-text text-muted">Please enter the role name</span>
+                    <span class="form-text text-muted">Please enter the a name</span>
                 </div>
                 <div class="form-group">
                     <label>Position</label>
@@ -33,6 +33,13 @@
                         @endforeach
                     </select>
                     <span class="form-text text-muted">Select a postion for this staff member</span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-list">
+                        <label class="checkbox">
+                        <input @if(!empty($worker) && $worker->isactive ) checked @endif type="checkbox" name="isactive" />
+                        <span></span>Is active</label>
+                    </div>
                 </div>
             </div>
 

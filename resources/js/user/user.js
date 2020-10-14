@@ -66,13 +66,13 @@ var MNGUser = function() {
                 overflow: 'visible',
                 autoHide: false,
                 template: function(row) {
-                    let edit = ` <a href="user/edit/${row.id}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit">
-                    <i class="fa fas fa-edit text-primary"></i></a>`;
+                    let edit = ` <a href="user/edit/${row.id}" class="btn btn-sm btn-clean btn-icon mr-1" title="Edit">
+                    <i class="fa fas fa-edit text-primary icon-nm"></i></a>`;
                     if (row.disabled == 1) {
                         return edit;
                     } else {
                         return edit + `<a href="#" class="btn btn-sm btn-clean btn-icon delete-user" data-id="${row.id}" title="Delete">
-                        <i class="fa far fa-trash-alt text-danger"></i></a> `;
+                        <i class="fa far fa-trash-alt text-dark-50 icon-nm"></i></a> `;
                     }
                 },
             }],

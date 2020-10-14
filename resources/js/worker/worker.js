@@ -50,28 +50,34 @@ var MNGWorker = function() {
 
             // columns definition
             columns: [{
-                field: 'id',
-                title: 'ID',
-            }, {
-                field: 'name',
-                title: 'Name'
-            }, {
-                field: 'position',
-                title: 'Position',
-            }, {
-                field: 'Actions',
-                title: 'Actions',
-                sortable: false,
-                width: 125,
-                overflow: 'visible',
-                autoHide: false,
-                template: function(row) {
-                    return ` <a href="staff/edit/${row.id}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit">
-                    <i class="fa fas fa-edit text-primary"></i></a>
-                        <a href="#" class="btn btn-sm btn-clean btn-icon delete-worker" data-id="${row.id}" title="Delete">
-                        <i class="fa far fa-trash-alt text-danger"></i></a> `;
+                    field: 'id',
+                    title: 'ID',
+                }, {
+                    field: 'name',
+                    title: 'Name'
+                }, {
+                    field: 'position',
+                    title: 'Position',
                 },
-            }],
+                {
+                    field: 'isactive',
+                    title: 'Active',
+                    template: function(row) {
+                        return row.isactive ? `<span class="label label-light-success label-pill label-inline">Yes</span>` : `<span class="label label-light-danger label-pill label-inline">No</span>`;
+                    },
+                }, {
+                    field: 'Actions',
+                    title: 'Actions',
+                    sortable: false,
+                    width: 125,
+                    overflow: 'visible',
+                    autoHide: false,
+                    template: function(row) {
+                        return ` <a href="staff/edit/${row.id}" class="btn btn-sm btn-clean btn-icon mr-1" title="Edit">
+                                <i class="fa icon-nm fas fa-edit text-primary"></i></a>`;
+                    },
+                }
+            ],
 
         });
 
@@ -83,36 +89,11 @@ var MNGWorker = function() {
 
     };
 
-    let deleteWorker = function() {
-        $('body').on('click', '.delete-worker', function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Do you want to delete this staff member?',
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: `Save`,
-                denyButtonText: `Cancel`,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    return $.post(`staff/delete/${$(this).data('id')}`, function(response) {
-                        let messageType = 'error';
-                        if (response.status == "OK") {
-                            messageType = 'success';
-                        } else if (response.status == "WARNING") {
-                            messageType = 'warning';
-                        }
-                        MNG.flash(response.message, messageType);
-                        datatable.reload();
-                    });
-                }
-            });
-        });
-    };
+
 
     return {
         init: function() {
             workerDatatable();
-            deleteWorker();
         },
     };
 }();
