@@ -66,9 +66,9 @@ var MNGRole = function() {
                     if (row.id != 1) {
                         return `
                         <a href="role/edit/${row.id}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit">
-                        ${MNG.iconSVG('edit')} </a>
+                        <i class="fa fas fa-edit text-primary"></i></a>
                         <a href="#" class="btn btn-sm btn-clean btn-icon delete-role" data-id="${row.id}" title="Delete">
-                        ${MNG.iconSVG('delete')}</a> `;
+                        <i class="fa far fa-trash-alt text-danger"></i></a> `;
                     }
                     return "";
                 },

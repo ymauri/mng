@@ -67,12 +67,12 @@ var MNGUser = function() {
                 autoHide: false,
                 template: function(row) {
                     let edit = ` <a href="user/edit/${row.id}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit">
-                        ${MNG.iconSVG('edit')} </a>`;
+                    <i class="fa fas fa-edit text-primary"></i></a>`;
                     if (row.disabled == 1) {
                         return edit;
                     } else {
                         return edit + `<a href="#" class="btn btn-sm btn-clean btn-icon delete-user" data-id="${row.id}" title="Delete">
-                        ${MNG.iconSVG('delete')}</a> `;
+                        <i class="fa far fa-trash-alt text-danger"></i></a> `;
                     }
                 },
             }],
