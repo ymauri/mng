@@ -5,7 +5,7 @@ return [
     'items' => [
         // Dashboard
         [
-            'title' => 'Dashboard',
+            'title' => 'Home',
             'root' => true,
             'icon' => 'media/svg/icons/Design/Layers.svg', // or can be 'flaticon-home' or any flaticon-*
             'page' => '/',
@@ -33,8 +33,14 @@ return [
                     'bullet' => 'dot',
                     'page' => '/staff'
                 ],
+                [
+                    'title' => 'Sources',
+                    'bullet' => 'dot',
+                    'page' => '/source'
+                ],
             ]
         ],
+
         // [
         //     'title' => 'Pages',
         //     'icon' => 'media/svg/icons/Shopping/Barcode-read.svg',

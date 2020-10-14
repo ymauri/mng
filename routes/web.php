@@ -73,3 +73,14 @@ Route::name('staff.')->middleware(['auth'])->prefix('staff')->group(function () 
     Route::post('/update/{worker}', 'WorkerController@update')->name('update')->middleware('permission:configuration');
 });
 
+// Manage Source
+Route::name('source.')->middleware(['auth'])->prefix('source')->group(function () {
+    Route::get('/', 'SourceController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'SourceController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/add', 'SourceController@add')->name('add')->middleware('permission:configuration');
+    Route::post('/create', 'SourceController@create')->name('create')->middleware('permission:configuration');
+    Route::post('/delete/{source}', 'SourceController@delete')->name('delete')->middleware('permission:configuration');
+    Route::get('/edit/{source}', 'SourceController@edit')->name('edit')->middleware('permission:configuration');
+    Route::post('/update/{source}', 'SourceController@update')->name('update')->middleware('permission:configuration');
+});
+
