@@ -91,4 +91,14 @@ class Listing extends Model
     {
         return $this->hasMany('App\Models\Rcheckouthotel');
     }
+
+    /**
+     * Mutator for type attribute
+     * @param mixed $value
+     *
+     * @return [type]
+     */
+    public function getTypeAttribute($value) {
+        return unserialize($value);
+    }
 }

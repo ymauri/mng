@@ -38,6 +38,11 @@ return [
                     'bullet' => 'dot',
                     'page' => '/source'
                 ],
+                [
+                    'title' => 'Listings',
+                    'bullet' => 'dot',
+                    'page' => '/listing'
+                ],
             ]
         ],
 

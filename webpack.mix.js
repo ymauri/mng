@@ -22,6 +22,7 @@ mix.js('resources/js/app.js', 'public/js')
     .scripts('resources/js/role/role.js', 'public/js/role/role.js')
     .scripts('resources/js/worker/worker.js', 'public/js/worker/worker.js')
     .scripts('resources/js/source/source.js', 'public/js/source/source.js')
+    .scripts('resources/js/listing/listing.js', 'public/js/listing/listing.js')
     .scripts('resources/js/helpers.js', 'public/js/helpers.js')
     .sass('resources/sass/app.scss', 'public/css');
 
