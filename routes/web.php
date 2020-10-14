@@ -90,7 +90,18 @@ Route::name('listing.')->middleware(['auth'])->prefix('listing')->group(function
     Route::post('/dt', 'ListingController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'ListingController@add')->name('add')->middleware('permission:configuration');
     Route::post('/create', 'ListingController@create')->name('create')->middleware('permission:configuration');
-    Route::post('/delete/{listing}', 'ListingController@delete')->name('delete')->middleware('permission:configuration');
     Route::get('/edit/{listing}', 'ListingController@edit')->name('edit')->middleware('permission:configuration');
     Route::post('/update/{listing}', 'ListingController@update')->name('update')->middleware('permission:configuration');
 });
+
+// Manage Help Content
+Route::name('help.')->middleware(['auth'])->prefix('help')->group(function () {
+    Route::get('/', 'HelpController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'HelpController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/add', 'HelpController@add')->name('add')->middleware('permission:configuration');
+    Route::post('/create', 'HelpController@create')->name('create')->middleware('permission:configuration');
+    Route::post('/delete/{help}', 'HelpController@delete')->name('delete')->middleware('permission:configuration');
+    Route::get('/edit/{help}', 'HelpController@edit')->name('edit')->middleware('permission:configuration');
+    Route::post('/update/{help}', 'HelpController@update')->name('update')->middleware('permission:configuration');
+});
+

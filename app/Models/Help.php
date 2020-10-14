@@ -23,7 +23,7 @@ class Help extends Model
     /**
      * @var array
      */
-    protected $fillable = ['form', 'field', 'content', 'label'];
+    protected $fillable = ['form', 'field', 'content'];
 
     /**
      * Indicates if the model should be timestamped.

@@ -43,6 +43,11 @@ return [
                     'bullet' => 'dot',
                     'page' => '/listing'
                 ],
+                [
+                    'title' => 'Help contents',
+                    'bullet' => 'dot',
+                    'page' => '/help'
+                ],
             ]
         ],
 
