@@ -24,6 +24,7 @@ mix.js('resources/js/app.js', 'public/js')
     .scripts('resources/js/source/source.js', 'public/js/source/source.js')
     .scripts('resources/js/listing/listing.js', 'public/js/listing/listing.js')
     .scripts('resources/js/help/help.js', 'public/js/help/help.js')
+    .scripts('resources/js/parameters/parameters.js', 'public/js/parameters/parameters.js')
     .scripts('resources/js/helpers.js', 'public/js/helpers.js')
     .scripts('resources/js/components/i18n.js', 'public/js/components/i18n.js')
     .sass('resources/sass/app.scss', 'public/css');

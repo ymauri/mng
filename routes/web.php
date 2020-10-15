@@ -105,3 +105,15 @@ Route::name('help.')->middleware(['auth'])->prefix('help')->group(function () {
     Route::post('/update/{help}', 'HelpController@update')->name('update')->middleware('permission:configuration');
 });
 
+
+// Manage Parameters
+Route::name('parameters.')->middleware(['auth'])->prefix('parameters')->group(function () {
+    Route::get('/', 'ParametersController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'ParametersController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/add', 'ParametersController@add')->name('add')->middleware('permission:configuration');
+    Route::post('/create', 'ParametersController@create')->name('create')->middleware('permission:configuration');
+    Route::post('/delete/{parameters}', 'ParametersController@delete')->name('delete')->middleware('permission:configuration');
+    Route::get('/edit/{parameters}', 'ParametersController@edit')->name('edit')->middleware('permission:configuration');
+    Route::post('/update/{parameters}', 'ParametersController@update')->name('update')->middleware('permission:configuration');
+});
+

@@ -48,6 +48,11 @@ return [
                     'bullet' => 'dot',
                     'page' => '/help'
                 ],
+                [
+                    'title' => 'Global settings',
+                    'bullet' => 'dot',
+                    'page' => '/parameters'
+                ],
             ]
         ],
 
