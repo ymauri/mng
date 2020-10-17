@@ -60,4 +60,12 @@ class Checkin extends Model
     {
         return $this->hasMany('App\Models\Rcheckinhotel');
     }
+
+    public function checkout() {
+        return $this->hasOne(Checkout::class, 'confcode', 'confcode');
+    }
+
+    public function listing() {
+        return $this->hasOne(Listing::class, 'id', 'Listing');
+    }
 }

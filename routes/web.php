@@ -117,3 +117,10 @@ Route::name('parameters.')->middleware(['auth'])->prefix('parameters')->group(fu
     Route::post('/update/{parameters}', 'ParametersController@update')->name('update')->middleware('permission:configuration');
 });
 
+//Manage Reservations
+Route::name('reservations.')->middleware(['auth'])->prefix('reservations')->group(function () {
+    Route::get('/', 'ReservationsController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'ReservationsController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/show/{checkin}', 'ReservationsController@show')->name('show')->middleware('permission:configuration');
+});
+

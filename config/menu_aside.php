@@ -12,7 +12,7 @@ return [
             'new-tab' => false,
         ],
 
-        // Custom
+        // Configurations
         [
             'title' => 'Configurations',
             'bullet' => 'line',
@@ -52,6 +52,20 @@ return [
                     'title' => 'Global settings',
                     'bullet' => 'dot',
                     'page' => '/parameters'
+                ],
+            ]
+        ],
+
+        // Guesty
+        [
+            'title' => 'Guesty',
+            'bullet' => 'line',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Reservations',
+                    'bullet' => 'dot',
+                    'page' => '/reservations'
                 ],
             ]
         ],
