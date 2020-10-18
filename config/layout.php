@@ -81,7 +81,7 @@ return [
             'theme' => 'light', // light, dark
             'fixed' => [
                 'desktop' => true,
-                'mobile' => true
+                'mobile' => false
             ]
         ],
 
