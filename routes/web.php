@@ -136,3 +136,7 @@ Route::name('blacklist.')->middleware(['auth'])->prefix('blacklist')->group(func
     Route::post('/update/{blacklist}', 'BlackListController@update')->name('update')->middleware('permission:configuration');
 });
 
+// Pricing
+Route::name('pricing.')->middleware(['auth'])->prefix('pricing')->group(function () {
+    Route::get('/', 'PricingController@index')->name('index')->middleware('permission:configuration');
+});

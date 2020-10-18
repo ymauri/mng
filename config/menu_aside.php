@@ -72,6 +72,11 @@ return [
                     'bullet' => 'dot',
                     'page' => '/blacklist'
                 ],
+                [
+                    'title' => 'Pricinag',
+                    'bullet' => 'dot',
+                    'page' => '/pricing'
+                ],
             ]
         ],
 
