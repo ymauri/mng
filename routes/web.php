@@ -124,3 +124,15 @@ Route::name('reservations.')->middleware(['auth'])->prefix('reservations')->grou
     Route::get('/show/{checkin}', 'ReservationsController@show')->name('show')->middleware('permission:configuration');
 });
 
+
+// Manage Parameters
+Route::name('blacklist.')->middleware(['auth'])->prefix('blacklist')->group(function () {
+    Route::get('/', 'BlackListController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'BlackListController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/add', 'BlackListController@add')->name('add')->middleware('permission:configuration');
+    Route::post('/create', 'BlackListController@create')->name('create')->middleware('permission:configuration');
+    Route::post('/delete/{blacklist}', 'BlackListController@delete')->name('delete')->middleware('permission:configuration');
+    Route::get('/edit/{blacklist}', 'BlackListController@edit')->name('edit')->middleware('permission:configuration');
+    Route::post('/update/{blacklist}', 'BlackListController@update')->name('update')->middleware('permission:configuration');
+});
+

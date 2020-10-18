@@ -67,6 +67,11 @@ return [
                     'bullet' => 'dot',
                     'page' => '/reservations'
                 ],
+                [
+                    'title' => 'Black List',
+                    'bullet' => 'dot',
+                    'page' => '/blacklist'
+                ],
             ]
         ],
 

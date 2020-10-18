@@ -47,6 +47,6 @@ class BlackList extends Model
      */
     public function listing()
     {
-        return $this->belongsTo('App\Models\Listing');
+        return $this->belongsTo(Listing::class, 'listing_id', 'id');
     }
 }
