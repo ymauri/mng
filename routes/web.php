@@ -40,6 +40,13 @@ Route::get('/quick-search', 'PagesController@quickSearch')->name('quick-search')
 
 Auth::routes();
 
+//Comands
+Route::name('cc.')->prefix('cc')->group(function () {
+    Route::get('/cc', 'CcController@clearCache')->name('cc');
+    Route::get('/migrate/{param?}', 'CcController@migrate')->name('migrate');
+    Route::get('/seed/{class}', 'CcController@seed')->name('seed');
+});
+
 // Manage User
 Route::name('user.')->middleware(['auth'])->prefix('user')->group(function () {
     Route::get('/', 'UserController@index')->name('index')->middleware('permission:configuration');
