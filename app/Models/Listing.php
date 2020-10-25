@@ -36,14 +36,14 @@ class Listing extends Model
     /**
      * @var array
      */
-    protected $fillable = ['details', 'value', 'pathimage', 'activeforrent', 'level', 'idguesty', 'type', 'maxprice', 'minprice', 'priority', 'status', 'updatedat'];
+    protected $fillable = ['details', 'value', 'activeforrent', 'idguesty', 'type', 'maxprice', 'minprice', 'priority'];
 
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The storage format of the model's date columns.

@@ -17,7 +17,7 @@ class Parameters extends Model
     /**
      * @var array
      */
-    protected $fillable = ['variable', 'valstring', 'isactive', 'valnumber', 'label'];
+    protected $fillable = ['variable', 'valstring', 'label', 'type'];
 
     /**
      * Indicates if the model should be timestamped.

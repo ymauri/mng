@@ -37,7 +37,7 @@ class Checkin extends Model
     /**
      * @var array
      */
-    protected $fillable = ['Listing', 'name', 'time', 'updatedat', 'email', 'phone', 'Source', 'nights', 'guests', 'confcode', 'date', 'idguesty', 'status', 'betalen', 'voldan', 'note', 'canceledat'];
+    protected $fillable = ['listing', 'name', 'time', 'updatedat', 'email', 'phone', 'source', 'nights', 'guests', 'confcode', 'date', 'idguesty', 'status', 'betalen', 'voldan', 'note', 'canceledat'];
 
     /**
      * Indicates if the model should be timestamped.
@@ -66,6 +66,6 @@ class Checkin extends Model
     }
 
     public function listing() {
-        return $this->hasOne(Listing::class, 'id', 'Listing');
+        return $this->hasOne(Listing::class, 'id', 'listing');
     }
 }
