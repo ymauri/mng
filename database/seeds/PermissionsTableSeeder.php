@@ -54,7 +54,7 @@ class PermissionsTableSeeder extends Seeder
         $admin = Role::create(['name' => 'Admin']);
 
         $admin->givePermissionTo(Permission::all());
-        $user = User::find(1); //Ernesto
+        $user = User::all()->first();
         $user->assignRole('Admin');
 
         $guest = Role::create(['name' => 'Guest']);
