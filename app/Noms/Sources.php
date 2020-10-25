@@ -4,7 +4,10 @@ namespace App\Noms;
 
 use ReflectionClass;
 
-class Guesty {
+/**
+ * Sources. Nomenclator for standardize the Guesty reservations sources
+ */
+class Sources {
     const AIRBNB = 'Airbnb';
     const BOOKING = 'Booking.com';
     const WEBSITE = 'website';
