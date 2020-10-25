@@ -147,4 +147,5 @@ Route::name('blacklist.')->middleware(['auth','web'])->prefix('blacklist')->grou
 // Pricing
 Route::name('pricing.')->middleware(['auth','web'])->prefix('pricing')->group(function () {
     Route::get('/', 'PricingController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/filter', 'PricingController@filter')->name('filter')->middleware('permission:configuration');
 });

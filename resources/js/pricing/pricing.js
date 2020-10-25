@@ -1,7 +1,7 @@
 'use strict';
 
 var MNGPricing = function() {
-    let initSelect = function() {
+    let initComponents = function() {
         $('#listings').select2({
             closeOnSelect: false
         });
@@ -27,11 +27,28 @@ var MNGPricing = function() {
                 'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
             }
         });
+
+        $('body').on('keyup', '.global-price', function() {
+            $(".new-price").val($(this).val());
+        });
+    }
+
+    let filterReservations = function() {
+        $("#btn-filter").on('click', function(event) {
+            event.preventDefault();
+            let button = $(this);
+            button.addClass('spinner spinner-white spinner-right');
+            $.post('/pricing/filter', $("#filter-data").serializeArray(), function(response) {
+                $("#price-data").html(response);
+                button.removeClass('spinner spinner-white spinner-right');
+            });
+        });
     }
 
     return {
         init: function() {
-            initSelect();
+            initComponents();
+            filterReservations();
         },
     };
 }();
