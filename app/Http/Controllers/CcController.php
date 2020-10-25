@@ -45,4 +45,14 @@ class CcController extends Controller
         Artisan::call($command);
         die('done');
     }
+
+    /**
+     * Clear spatie cache comand
+     * @return void
+     */
+    public function clearSpatie() {
+        Artisan::call('cache:forget spatie.permission.cache');
+        die('done');
+    }
+
 }

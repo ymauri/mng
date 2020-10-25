@@ -43,12 +43,13 @@ Auth::routes();
 //Comands
 Route::name('cc.')->prefix('cc')->group(function () {
     Route::get('/cc', 'CcController@clearCache')->name('cc');
+    Route::get('/spatie', 'CcController@clearSpatie')->name('spatie');
     Route::get('/migrate/{param?}', 'CcController@migrate')->name('migrate');
     Route::get('/seed/{class}', 'CcController@seed')->name('seed');
 });
 
 // Manage User
-Route::name('user.')->middleware(['auth'])->prefix('user')->group(function () {
+Route::name('user.')->middleware(['auth','web'])->prefix('user')->group(function () {
     Route::get('/', 'UserController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'UserController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'UserController@add')->name('add')->middleware('permission:configuration');
@@ -59,7 +60,7 @@ Route::name('user.')->middleware(['auth'])->prefix('user')->group(function () {
 });
 
 // Manage Role
-Route::name('role.')->middleware(['auth'])->prefix('role')->group(function () {
+Route::name('role.')->middleware(['auth','web'])->prefix('role')->group(function () {
     Route::get('/', 'RoleController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'RoleController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'RoleController@add')->name('add')->middleware('permission:configuration');
@@ -70,7 +71,7 @@ Route::name('role.')->middleware(['auth'])->prefix('role')->group(function () {
 });
 
 // Manage Staff
-Route::name('staff.')->middleware(['auth'])->prefix('staff')->group(function () {
+Route::name('staff.')->middleware(['auth','web'])->prefix('staff')->group(function () {
     Route::get('/', 'WorkerController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'WorkerController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'WorkerController@add')->name('add')->middleware('permission:configuration');
@@ -81,7 +82,7 @@ Route::name('staff.')->middleware(['auth'])->prefix('staff')->group(function () 
 });
 
 // Manage Source
-Route::name('source.')->middleware(['auth'])->prefix('source')->group(function () {
+Route::name('source.')->middleware(['auth','web'])->prefix('source')->group(function () {
     Route::get('/', 'SourceController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'SourceController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'SourceController@add')->name('add')->middleware('permission:configuration');
@@ -92,7 +93,7 @@ Route::name('source.')->middleware(['auth'])->prefix('source')->group(function (
 });
 
 // Manage Listing
-Route::name('listing.')->middleware(['auth'])->prefix('listing')->group(function () {
+Route::name('listing.')->middleware(['auth','web'])->prefix('listing')->group(function () {
     Route::get('/', 'ListingController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'ListingController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'ListingController@add')->name('add')->middleware('permission:configuration');
@@ -102,7 +103,7 @@ Route::name('listing.')->middleware(['auth'])->prefix('listing')->group(function
 });
 
 // Manage Help Content
-Route::name('help.')->middleware(['auth'])->prefix('help')->group(function () {
+Route::name('help.')->middleware(['auth','web'])->prefix('help')->group(function () {
     Route::get('/', 'HelpController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'HelpController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'HelpController@add')->name('add')->middleware('permission:configuration');
@@ -114,7 +115,7 @@ Route::name('help.')->middleware(['auth'])->prefix('help')->group(function () {
 
 
 // Manage Parameters
-Route::name('parameters.')->middleware(['auth'])->prefix('parameters')->group(function () {
+Route::name('parameters.')->middleware(['auth','web'])->prefix('parameters')->group(function () {
     Route::get('/', 'ParametersController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'ParametersController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'ParametersController@add')->name('add')->middleware('permission:configuration');
@@ -125,7 +126,7 @@ Route::name('parameters.')->middleware(['auth'])->prefix('parameters')->group(fu
 });
 
 //Manage Reservations
-Route::name('reservations.')->middleware(['auth'])->prefix('reservations')->group(function () {
+Route::name('reservations.')->middleware(['auth','web'])->prefix('reservations')->group(function () {
     Route::get('/', 'ReservationsController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'ReservationsController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/show/{checkin}', 'ReservationsController@show')->name('show')->middleware('permission:configuration');
@@ -133,7 +134,7 @@ Route::name('reservations.')->middleware(['auth'])->prefix('reservations')->grou
 
 
 // Manage Parameters
-Route::name('blacklist.')->middleware(['auth'])->prefix('blacklist')->group(function () {
+Route::name('blacklist.')->middleware(['auth','web'])->prefix('blacklist')->group(function () {
     Route::get('/', 'BlackListController@index')->name('index')->middleware('permission:configuration');
     Route::post('/dt', 'BlackListController@dt')->name('datatable')->middleware('permission:configuration');
     Route::get('/add', 'BlackListController@add')->name('add')->middleware('permission:configuration');
@@ -144,6 +145,6 @@ Route::name('blacklist.')->middleware(['auth'])->prefix('blacklist')->group(func
 });
 
 // Pricing
-Route::name('pricing.')->middleware(['auth'])->prefix('pricing')->group(function () {
+Route::name('pricing.')->middleware(['auth','web'])->prefix('pricing')->group(function () {
     Route::get('/', 'PricingController@index')->name('index')->middleware('permission:configuration');
 });
