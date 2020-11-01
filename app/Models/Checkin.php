@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property string $Listing
+ * @property string $listing
  * @property string $name
  * @property string $time
  * @property string $updatedat
@@ -65,7 +65,7 @@ class Checkin extends Model
         return $this->hasOne(Checkout::class, 'confcode', 'confcode');
     }
 
-    public function listing() {
+    public function listings() {
         return $this->hasOne(Listing::class, 'id', 'listing');
     }
 }

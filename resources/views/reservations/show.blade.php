@@ -14,7 +14,7 @@
             <!--begin::Body-->
             <div class="card-body d-flex align-items-center">
                 <div class="py-2">
-                <h3 class="text-white font-weight-bolder mb-3">{{ $checkin->listing->details }}</h3>
+                <h3 class="text-white font-weight-bolder mb-3">{{ $checkin->listings->details }}</h3>
                     <p class="text-white font-size-lg"><i class="fa icon-nm fas fa-house-user text-white"></i> &nbsp;{{ $checkin->name }}
                     <br><i class="fa icon-nm far fa-envelope text-white"></i>&nbsp; <a href="mailto:{{ $checkin->email }}">{{ $checkin->email }}</a>
                     <br><i class="fa icon-nm far fa-phone text-white"></i>&nbsp; {{ $checkin->phone }}
@@ -34,7 +34,7 @@
                     @if(!empty($checkin->checkout))
                         <br><i class="fa icon-nm far fa-calendar-times text-white"></i>&nbsp; {{ $checkin->checkout->time }}
                     @endif
-                    <br><a target="_blank" href="{{config('guesty.site.url')}}/reservations/{{$checkin->idguesty}}" class="btn btn-link btn-link-white mt-3">Go to guesty <i class="fa icon-nm fas fa-external-link-alt text-white"></i></a>
+                    <br><a target="_blank" href="{{config('guesty.app.url')}}reservations/{{$checkin->idguesty}}/summary" class="btn btn-link btn-link-white mt-3">Go to guesty <i class="fa icon-nm fas fa-external-link-alt text-white"></i></a>
                 </div>
             </div>
             <!--end::Body-->
