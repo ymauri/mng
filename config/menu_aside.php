@@ -77,6 +77,11 @@ return [
                     'bullet' => 'dot',
                     'page' => '/pricing'
                 ],
+                [
+                    'title' => 'Rules',
+                    'bullet' => 'dot',
+                    'page' => '/rule'
+                ],
             ]
         ],
 

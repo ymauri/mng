@@ -30,6 +30,7 @@ mix.js('resources/js/app.js', 'public/js')
     .scripts('resources/js/pricing/pricing.js', 'public/js/pricing/pricing.js')
     .scripts('resources/js/helpers.js', 'public/js/helpers.js')
     .scripts('resources/js/components/i18n.js', 'public/js/components/i18n.js')
+    .scripts('resources/js/rule/rule.js', 'public/js/rule/rule.js')
     .sass('resources/sass/app.scss', 'public/css');
 
 // Global jquery

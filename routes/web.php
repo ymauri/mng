@@ -151,3 +151,15 @@ Route::name('pricing.')->middleware(['auth','web'])->prefix('pricing')->group(fu
     Route::post('/filter', 'PricingController@filter')->name('filter')->middleware('permission:configuration');
     Route::post('/update', 'PricingController@update')->name('filter')->middleware('permission:configuration');
 });
+
+
+// Manage Rule
+Route::name('rule.')->middleware(['auth','web'])->prefix('rule')->group(function () {
+    Route::get('/', 'RuleController@index')->name('index')->middleware('permission:configuration');
+    Route::post('/dt', 'RuleController@dt')->name('datatable')->middleware('permission:configuration');
+    Route::get('/add', 'RuleController@add')->name('add')->middleware('permission:configuration');
+    Route::post('/create', 'RuleController@create')->name('create')->middleware('permission:configuration');
+    Route::post('/delete/{rule}', 'RuleController@delete')->name('delete')->middleware('permission:configuration');
+    Route::get('/edit/{rule}', 'RuleController@edit')->name('edit')->middleware('permission:configuration');
+    Route::post('/update/{rule}', 'RuleController@update')->name('update')->middleware('permission:configuration');
+});
