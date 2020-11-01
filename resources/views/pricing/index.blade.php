@@ -100,7 +100,7 @@
                 <h3 class="card-label"> Listings info <small>This secion contains the data came from Guesty </small></h3>
             </div>
             <div class="card-toolbar">
-                <button class="btn btn-light-primary font-weight-bold" id='btn-update'>Update</button>
+                <button class="btn btn-light-primary font-weight-bold btn-update" disabled>Update</button>
             </div>
         </div>
         <div class="card-body">
@@ -108,8 +108,8 @@
                 @include('pricing.no-info')
             </form>
         </div>
-        <div class="card-footer d-flex justify-content-between">
-            <button class="btn btn-light-primary font-weight-bold" id='btn-update'>Update</button>
+        <div class="card-footer text-right ">
+            <button class="btn btn-light-primary font-weight-bold btn-update" disabled>Update</button>
         </div>
     </div>
 @endsection

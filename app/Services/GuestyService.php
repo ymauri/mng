@@ -44,7 +44,7 @@ class GuestyService {
     }
 
     /**
-     * Gets listtingCalendar object by dates and optionally listings id
+     * Get listtingCalendar object by dates and optionally listings id
      * @param string $from
      * @param string $to
      * @param array $ids
@@ -57,6 +57,17 @@ class GuestyService {
             'to' => $to,
             'ids' => count($ids) > 0 ? $ids : ''
         ]);
+        return $this->parseResponse($response);
+    }
+
+    /**
+     * Update listtingCalendar object by dates and optionally listings id
+     * @param mixed $data | [{"listingId":"LISTINGID1","from":"2020-01-13","to":"2020-01-16","price":70}]
+     *
+     * @return mixed
+     */
+    public function updatelistingCalendar(array $data) {
+        $response = $this->auth()->put($this->url.'listings/calendars', $data);
         return $this->parseResponse($response);
     }
 }

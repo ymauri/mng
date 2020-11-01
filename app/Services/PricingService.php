@@ -8,7 +8,8 @@ use Carbon\Carbon;
 /**
  * PricingService. Functionalities related with the bulk update prices in guesty.
  */
-class PricingService {
+class PricingService
+{
 
     /**
      * @var GuestyService
@@ -29,10 +30,11 @@ class PricingService {
      *
      * @return mixed
      */
-    public function filterCalendar(string $from, string $to, array $weekdays = [], array $listings = []) {
+    public function filterCalendar(string $from, string $to, array $weekdays = [], array $listings = [])
+    {
         $calendars = $this->guesty->listingCalendar($from, $to, $listings);
         $result = [];
-        foreach ($calendars as $calendar){
+        foreach ($calendars as $calendar) {
             if (count($weekdays) == 0 || in_array(Carbon::parse($calendar['date'])->dayOfWeek, $weekdays)) {
                 $listing = Listing::where('idguesty', $calendar['listingId'])->first();
                 $calendar['listingNumber'] = !empty($listing) ? $listing->value : 'Not Found';
@@ -40,5 +42,33 @@ class PricingService {
             }
         }
         return $result;
+    }
+
+    /**
+     * Update listing prices on guesty platform
+     * @param array $data
+     *
+     * @return bool
+     */
+    public function update(array $data)
+    {
+        $arrayToSend = [];
+        foreach ($data as $key => $item) {
+            $keyData = explode('_', $key);
+            if (!empty($item)) {
+                $arrayToSend[] = [
+                    'listingId' => $keyData[1],
+                    'from'      => $keyData[0],
+                    'to'        => $keyData[0],
+                    'price'     => (int) $item,
+                    'note'      => 'Updated by API'
+                ];
+            }
+        }
+        if (count($arrayToSend) > 0) {
+            $this->guesty->updatelistingCalendar($arrayToSend);
+            return true;
+        }
+        return false;
     }
 }

@@ -28,7 +28,13 @@
                     <td>{{$item['date']}}</td>
                     <td>€ {{$item['price']}}</td>
                     <td> <span class="label label-light-{{App\Noms\Status::color($item['status'])}} label-inline mt-2">{{ucfirst($item['status'])}}</span></td>
-                    <td><input class="new-price form-control form-control-solid w-25" placeholder="€€€"  type="number" step="1" name="{{$item['date']."_".$item['listingId']}}"></td>
+                    <td>
+                        @if(ucfirst($item['status']) == App\Noms\Status::AVAILABLE)
+                            <input class="new-price form-control form-control-solid w-25" placeholder="€€€"  type="number" step="1" name="{{$item['date']."_".$item['listingId']}}">
+                        @else
+                            -
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>

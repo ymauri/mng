@@ -40,7 +40,28 @@ var MNGPricing = function() {
             button.addClass('spinner spinner-white spinner-right');
             $.post('/pricing/filter', $("#filter-data").serializeArray(), function(response) {
                 $("#price-data").html(response);
+                if ($("#price-data table").length > 0) {
+                    $(".btn-update").prop('disabled', false);
+                }
                 button.removeClass('spinner spinner-white spinner-right');
+            });
+        });
+    }
+
+    let updateListings = function() {
+        $(".btn-update").on('click', function(event) {
+            event.preventDefault();
+            $(".btn-update").addClass('spinner spinner-white spinner-right');
+            $.post('/pricing/update', $("#price-data").serializeArray(), function(response) {
+                $(".btn-update").removeClass('spinner spinner-white spinner-right');
+                let messageType = 'danger';
+                if (response.status == "OK") {
+                    messageType = 'success';
+                } else if (response.status == "WARNING") {
+                    messageType = 'warning';
+                }
+                MNG.flash(response.message, messageType);
+                $(".new-price, .global-price").val("");
             });
         });
     }
@@ -49,6 +70,7 @@ var MNGPricing = function() {
         init: function() {
             initComponents();
             filterReservations();
+            updateListings();
         },
     };
 }();
