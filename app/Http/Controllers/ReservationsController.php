@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Checkin;
 use App\Models\Checkout;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ReservationsController extends Controller
@@ -39,15 +41,15 @@ class ReservationsController extends Controller
     public function dt(Request $request)
     {
         $str = !empty($request->input('query')) ? $request->input('query')['name'] : "";
-        $date = !empty($request->input('query')) ? $request->input('query')['date'] : "";
         $query = Checkin::with('checkout', 'listings')->orderBy('time', 'desc');
-        if (!empty($str)) {
-            $query->whereRaw("name LIKE '%$str%'");
+        try {
+            Carbon::parse($str);
+            $query->whereDate("time", $str);
+        } catch (Exception $e) {
+            $str = strtoupper($str);
+            $query->whereRaw("UPPER(name) LIKE '%$str%'");
             $query->orWhereRaw("phone LIKE '%$str%'");
-            $query->orWhereRaw("email LIKE '%$str%'");
-        }
-        if (!empty($date)) {
-            $query->whereRaw("label LIKE '%$str%'");
+            $query->orWhereRaw("UPPER(email) LIKE '%$str%'");
         }
         return datatables()->of($query)->make(true);
     }
