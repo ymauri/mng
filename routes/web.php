@@ -46,6 +46,7 @@ Route::name('cc.')->prefix('cc')->group(function () {
     Route::get('/spatie', 'CcController@clearSpatie')->name('spatie');
     Route::get('/migrate/{param?}', 'CcController@migrate')->name('migrate');
     Route::get('/seed/{class}', 'CcController@seed')->name('seed');
+    Route::get('/reservation', 'CcController@reservation')->name('reservation');
 });
 
 // Manage User

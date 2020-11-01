@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Http;
 /**
  * GuestyService allows to connect with the guesty API and interact with it
  */
-class GuestyService {
+class GuestyService
+{
 
     private $user;
     private $url;
@@ -25,7 +26,8 @@ class GuestyService {
      * Authenticate on guesty API
      * @return Http
      */
-    private function auth() {
+    private function auth()
+    {
         return Http::withBasicAuth($this->user, $this->password);
     }
 
@@ -35,7 +37,8 @@ class GuestyService {
      *
      * @return mixed
      */
-    private function parseResponse($response) {
+    private function parseResponse($response)
+    {
         if ($response->ok()) {
             return $response->json();
         } else {
@@ -51,8 +54,9 @@ class GuestyService {
      *
      * @return mixed
      */
-    public function listingCalendar(string $from, string $to, array $ids = []) {
-        $response = $this->auth()->get($this->url.'listings/calendars', [
+    public function listingCalendar(string $from, string $to, array $ids = [])
+    {
+        $response = $this->auth()->get($this->url . 'listings/calendars', [
             'from' => $from,
             'to' => $to,
             'ids' => count($ids) > 0 ? $ids : ''
@@ -66,8 +70,28 @@ class GuestyService {
      *
      * @return mixed
      */
-    public function updatelistingCalendar(array $data) {
-        $response = $this->auth()->put($this->url.'listings/calendars', $data);
+    public function updatelistingCalendar(array $data)
+    {
+        $response = $this->auth()->put($this->url . 'listings/calendars', $data);
+        return $this->parseResponse($response);
+    }
+
+    /**
+     * Get Reservation data
+     * @param string $date
+     *
+     * @return array
+     */
+    public function reservation(string $date)
+    {
+        $response = $this->auth()->get(
+            $this->url . 'reservations',
+            [
+                'fields' => 'checkIn checkOut checkInDateLocalized checkOutDateLocalized confirmationCode listing.title status source nightsCount guestsCount notes.guest guest money.fareAccommodation money.invoiceItems money.balanceDue money.hostPayout canceledAt',
+                'filters' => '[{"field":"status", "operator":"$in", "value":["confirmed","canceled"]},{"field":"checkInDateLocalized", "operator":"$eq","value":"'.$date.'"}]',
+                'limit' => '30'
+            ]
+        );
         return $this->parseResponse($response);
     }
 }

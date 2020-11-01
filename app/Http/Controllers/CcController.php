@@ -55,4 +55,13 @@ class CcController extends Controller
         die('done');
     }
 
+    /**
+     * Retrieve reservations from guesty
+     * @return void
+     */
+    public function reservation() {
+        Artisan::call('retrieve:reservation');
+        die('done');
+    }
+
 }

@@ -40,7 +40,7 @@ class ReservationsController extends Controller
     {
         $str = !empty($request->input('query')) ? $request->input('query')['name'] : "";
         $date = !empty($request->input('query')) ? $request->input('query')['date'] : "";
-        $query = Checkin::with('checkout', 'listing')->orderBy('time', 'desc');
+        $query = Checkin::with('checkout', 'listings')->orderBy('time', 'desc');
         if (!empty($str)) {
             $query->whereRaw("name LIKE '%$str%'");
             $query->orWhereRaw("phone LIKE '%$str%'");
