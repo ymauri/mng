@@ -40,16 +40,18 @@ class ReservationsController extends Controller
      */
     public function dt(Request $request)
     {
-        $str = !empty($request->input('query')) ? $request->input('query')['name'] : "";
+        $str = !empty($request->input('query')) ? $request->input('query')['name'] : null;
         $query = Checkin::with('checkout', 'listings')->orderBy('time', 'desc');
-        try {
-            Carbon::parse($str);
-            $query->whereDate("time", $str);
-        } catch (Exception $e) {
-            $str = strtoupper($str);
-            $query->whereRaw("UPPER(name) LIKE '%$str%'");
-            $query->orWhereRaw("phone LIKE '%$str%'");
-            $query->orWhereRaw("UPPER(email) LIKE '%$str%'");
+        if (!empty($str)) {
+            try {
+                Carbon::parse($str);
+                $query->whereDate("time", $str);
+            } catch (Exception $e) {
+                $str = strtoupper($str);
+                $query->whereRaw("UPPER(name) LIKE '%$str%'");
+                $query->orWhereRaw("phone LIKE '%$str%'");
+                $query->orWhereRaw("UPPER(email) LIKE '%$str%'");
+            }
         }
         return datatables()->of($query)->make(true);
     }
