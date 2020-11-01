@@ -37,14 +37,14 @@ class Checkin extends Model
     /**
      * @var array
      */
-    protected $fillable = ['listing', 'name', 'time', 'updatedat', 'email', 'phone', 'source', 'nights', 'guests', 'confcode', 'date', 'idguesty', 'status', 'betalen', 'voldan', 'note', 'canceledat'];
+    protected $fillable = ['listing', 'name', 'time', 'email', 'phone', 'source', 'nights', 'guests', 'confcode', 'date', 'idguesty', 'status', 'betalen', 'voldan', 'note', 'canceledat'];
 
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The storage format of the model's date columns.

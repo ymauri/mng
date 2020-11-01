@@ -33,14 +33,14 @@ class Checkout extends Model
     /**
      * @var array
      */
-    protected $fillable = ['listing', 'time', 'name', 'email', 'phone', 'Source', 'nights', 'date', 'updatedat', 'confcode', 'guests', 'idguesty', 'status'];
+    protected $fillable = ['listing', 'time', 'name', 'email', 'phone', 'source', 'nights', 'confcode', 'guests', 'idguesty', 'status'];
 
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The storage format of the model's date columns.
