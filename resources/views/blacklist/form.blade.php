@@ -2,7 +2,7 @@
  $action = empty($blacklist) ? 'Add' : 'Edit';
 
  $page_breadcrumbs = [
-     ["page" => "/", 'title' => "Configurations"],
+     ["page" => "/", 'title' => "Guesty"],
      ["page" => "/blacklist", 'title' => "Blacklist"],
      ["page" => "/blacklist/".strtolower($action), 'title' => $action]
  ];

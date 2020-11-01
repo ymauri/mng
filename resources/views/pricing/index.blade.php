@@ -1,7 +1,7 @@
 @php
  $page_breadcrumbs = [
-     ["page" => "#", 'title' => "Configurations"],
-     ["page" => "/listing", 'title' => "Listing"]
+     ["page" => "#", 'title' => "Guesty"],
+     ["page" => "/pricing", 'title' => "Pricing"]
  ];
 @endphp
 @extends('layout.default')

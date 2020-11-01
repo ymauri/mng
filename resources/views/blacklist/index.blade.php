@@ -1,6 +1,6 @@
 @php
  $page_breadcrumbs = [
-     ["page" => "#", 'title' => "Configurations"],
+     ["page" => "#", 'title' => "Guesty"],
      ["page" => "/blacklist", 'title' => "BlackList"]
  ];
 @endphp
