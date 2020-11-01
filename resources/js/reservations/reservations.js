@@ -57,7 +57,7 @@ var MNGReservations = function() {
                 title: 'ID',
                 width: 40
             }, {
-                field: 'listing.value',
+                field: 'listings.value',
                 title: 'Listing',
                 width: 50
             }, {
@@ -78,10 +78,22 @@ var MNGReservations = function() {
                 },
             }, {
                 field: 'nights',
-                title: 'Nights'
+                title: 'Nights',
+                width: 45
             }, {
                 field: 'guests',
-                title: 'Guests'
+                title: 'Guests',
+                width: 50
+            }, {
+                field: 'status',
+                title: 'Status',
+                template: function(row) {
+                    if (row.status == 'confirmed') {
+                        return '<span class="label label-light-success label-pill label-inline">Confirmed</span>';
+                    } else {
+                        return `<span class="label label-light-danger label-pill label-inline">Canceled ${row.canceldat ? "at "+ row.canceldat : ''}</span>`;
+                    }
+                }
             }, {
                 field: 'Actions',
                 title: 'Actions',
@@ -90,8 +102,7 @@ var MNGReservations = function() {
                 overflow: 'visible',
                 autoHide: false,
                 template: function(row) {
-                    return `
-                        <a href="reservations/show/${row.id}" class="btn btn-sm btn-clean btn-icon mr-1" title="Edit">
+                    return `<a href="reservations/show/${row.id}" class="btn btn-sm btn-clean btn-icon mr-1" title="Edit">
                         <i class="fa far fa-eye  text-primary icon-nm"></i></a> `;
                 },
             }]
