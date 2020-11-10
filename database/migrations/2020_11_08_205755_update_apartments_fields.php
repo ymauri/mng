@@ -16,19 +16,26 @@ class UpdateApartmentsFields extends Migration
      */
     public function up()
     {
-        $rules = Rule::all();
-        $listings = Listing::all();
+        $rules = DB::select('select * from rule');
+
         foreach ($rules as $rule) {
-            $affectedListings = [];
-            foreach ($listings as $listing) {
-                if (strpos((string)$rule->apartments, $listing->idguesty) !== false) {
-                    $affectedListings[] = $listing->idguesty;
-                }
+            $ruleObject = Rule::find($rule->id);
+            if (!empty($ruleObject)) {
+                $ruleObject->update([
+                    'apartments'    => unserialize($rule->apartments),
+                    'dayweek'       => unserialize($rule->dayweek),
+                    'daysahead'  => !empty($rule->ishook) ? $rule->startingfrom : $rule->daysahead
+                ]);
             }
-            $rule->update([
-                'apartments' => $affectedListings
-            ]);
         }
+
+        Schema::table('rule', function (Blueprint $table) {
+            $table->dropColumn('pricesbylisting');
+            $table->dropColumn('pricesbytype');
+            $table->dropColumn('bytype');
+            $table->dropColumn('typeofapartment');
+            $table->dropColumn('startingfrom');
+        });
     }
 
     /**

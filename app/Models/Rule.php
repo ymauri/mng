@@ -20,14 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $unit
  * @property int $daysahead
  * @property array $apartments
- * @property array $typeofapartment
- * @property array $pricesbylisting
- * @property array $pricesbytype
- * @property boolean $bytype
  * @property array $dayweek
  * @property int $priority
  * @property boolean $ishook
- * @property int $startingfrom
  * @property Rulelog[] $rulelogs
  */
 class Rule extends Model
@@ -42,7 +37,7 @@ class Rule extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'details', 'time', 'method', 'active', 'action', 'cond', 'conditionvalue', 'actionvalue', 'begin', 'ends', 'unit', 'daysahead', 'apartments', 'typeofapartment', 'pricesbylisting', 'pricesbytype', 'bytype', 'dayweek', 'priority', 'ishook', 'startingfrom'];
+    protected $fillable = ['name', 'details', 'time', 'method', 'active', 'action', 'cond', 'conditionvalue', 'actionvalue', 'begin', 'ends', 'unit', 'daysahead', 'apartments', 'dayweek', 'priority', 'ishook'];
 
     /**
      * Indicates if the model should be timestamped.
