@@ -65,4 +65,8 @@ class Rule extends Model
     {
         return $this->hasMany('App\Models\Rulelog');
     }
+
+    public function getApartmentsAttribute() {
+        return json_decode($this->attributes['apartments']);
+    }
 }
