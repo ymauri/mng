@@ -51,55 +51,57 @@ var MNGRule = function() {
 
                 // columns definition
                 columns: [{
-                    field: 'priority',
-                    title: 'Priority',
-                    width: 60
-                }, {
-                    field: 'name',
-                    title: 'Name'
-                }, {
-                    field: 'ishook',
-                    title: 'Type',
-                    template: function(row) {
-                        return row.ishook ? 'Hook' : 'Cron Job';
-                    },
-                }, {
-                    field: 'action',
-                    title: 'Action',
-                    template: function(row) {
-                        return row.action == 'listing_lower_price' ? "Rise price" : 'Lower price'
-                    }
-                }, {
-                    field: 'actionvalue',
-                    title: 'Value',
-                    width: 60,
-                    template: function(row) {
-                        return `${row.actionvalue} (${row.unit == 'percentage' ? '%' : '€'})`;
-                    }
-                }, {
-                    field: 'status',
-                    title: 'Status',
-                    template: function(row) {
-                        if (row.status) {
-                            return `<span class="label label-light-info label-pill label-inline">Enable</span>`;
+                        field: 'priority',
+                        title: 'Priority',
+                        width: 60
+                    }, {
+                        field: 'name',
+                        title: 'Name'
+                    }, {
+                        field: 'ishook',
+                        title: 'Type',
+                        template: function(row) {
+                            return row.ishook ? 'Hook' : 'Cron Job';
+                        },
+                    }, {
+                        field: 'action',
+                        title: 'Action',
+                        template: function(row) {
+                            return row.action == 'listing_lower_price' ? "Rise price" : 'Lower price'
                         }
-                        return '<span class="label label-light-danger label-pill label-inline"> Disable</span>';
+                    }, {
+                        field: 'actionvalue',
+                        title: 'Value',
+                        width: 60,
+                        template: function(row) {
+                            return `${row.actionvalue} (${row.unit == 'percentage' ? '%' : '€'})`;
+                        }
+                    }, {
+                        field: 'active',
+                        title: 'Status',
+                        template: function(row) {
+                            if (parseInt(row.active) == 1) {
+                                return `<span class="label label-light-info label-pill label-inline">Enable</span>`;
+                            }
+                            return '<span class="label label-light-danger label-pill label-inline"> Disable</span>';
+                        },
                     },
-                }, {
-                    field: 'Actions',
-                    title: 'Actions',
-                    sortable: false,
-                    width: 125,
-                    overflow: 'visible',
-                    autoHide: false,
-                    template: function(row) {
-                        return `
+                    {
+                        field: 'Actions',
+                        title: 'Actions',
+                        sortable: false,
+                        width: 125,
+                        overflow: 'visible',
+                        autoHide: false,
+                        template: function(row) {
+                            return `
                             <a href="rule/edit/${row.id}" class="btn btn-sm btn-clean btn-icon mr-1" title="Edit">
                             <i class="fa fas fa-edit text-primary icon-nm"></i></a>
                             <a href="#" class="btn btn-sm btn-clean btn-icon delete-rule" data-id="${row.id}" title="Delete">
                             <i class="fa far fa-trash-alt text-dark-50 icon-nm"></i></a> `;
-                    },
-                }],
+                        },
+                    }
+                ],
 
             });
 
@@ -153,9 +155,9 @@ var MNGRule = function() {
                     format: 'YYYY-MM-DD',
                     separator: ' to '
                 },
-                startDate: moment(),
-                endDate: moment().add(6, 'days'),
-                minDate: moment(),
+                startDate: moment($('#begin').val(), 'YYYY-MM-DD'),
+                endDate: moment($('#ends').val(), 'YYYY-MM-DD'),
+                minDate: moment().subtract(2, 'years'),
                 maxDate: moment().add(2, 'years'),
                 ranges: {
                     'Today': [moment(), moment()],
@@ -164,11 +166,16 @@ var MNGRule = function() {
                     'Next 30 Days': [moment().add(29, 'days'), moment()],
                     'Next Month': [moment().add(1, 'month').startOf('month'), moment().add(1, 'month').endOf('month')]
                 }
-            });
+            }).on('apply.daterangepicker', function(ev, picker) {
+                $('#begin').val(picker.startDate.format('YYYY-MM-DD'));
+                $('#ends').val(picker.endDate.format('YYYY-MM-DD'));
+            });;
         }
 
         if ($('#time').length > 0) {
-            $('#time').timepicker();
+            $('#time').timepicker({
+                timeFormat: 'HH:mm'
+            });
         }
 
         $('input[name="ishook"]').on('click', function() {

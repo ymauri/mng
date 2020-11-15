@@ -19,7 +19,7 @@
                 <div class="col-3">
                     <span class="switch switch-sm switch-icon">
                         <label>
-                        <input type="checkbox" @if(!empty($rule)) checked="checked" @endif name="isactive"/>
+                        <input type="checkbox" @if(!empty($rule->active)) checked="checked" @endif name="active"/>
                         <span></span>
                         </label>
                     </span>
@@ -49,9 +49,9 @@
                     </div>
                     <div class="form-group col-12 col-lg-4">
                         <label>Listings</label>
-                        <select name="listings[]" id="listings" class="form-control form-control-solid select2" multiple="multiple">
+                        <select name="apartments[]" id="listings" class="form-control form-control-solid select2" multiple="multiple">
                             @foreach ($listings as $listing)
-                                <option value="{{$listing->idguesty}}" @if (in_array($listing->idguesty, $rule->apartments)) selected @endif>{{$listing->value}}
+                                <option value="{{$listing->idguesty}}" @if (!empty($rule) && in_array($listing->idguesty, $rule->apartments)) selected @endif>{{$listing->value}}
                                     @foreach ($listing->type as $type)
                                         @if($type== "Apartment" || $type == "Studio")
                                             <strong class="text-danger">({{$type}})</strong>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="form-group col-12 col-lg-4">
                         <label>Condition</label>
-                        <select name="condition" id="condition" class="form-control form-control-solid">
+                        <select name="cond" id="condition" class="form-control form-control-solid @error('cond') is-invalid @enderror">
                             <option value="listing_available_more" @if(!empty($rule) && $rule->condition == "listing_available_more") selected @endif>More than X listings availables </option>
                             <option value="listing_available_less" @if(!empty($rule) && $rule->condition == "listing_available_less") selected @endif>Less than X listings availables </option>
                             <option value="none_condition" @if(!empty($rule) && $rule->condition == "none_condition") selected @endif>No Condition</option>
@@ -83,7 +83,7 @@
                             <input type="radio" name="ishook"  @empty($rule->ishook) checked="checked" @endempty value="0">
                             <span></span>At a specific date/time</label>
                             <label class="radio radio-solid">
-                            <input type="radio" name="ishook" @if($rule->ishook) checked="checked" @endif value="1">
+                            <input type="radio" name="ishook" @if(!empty($rule) && $rule->ishook) checked="checked" @endif value="1">
                             <span></span>When a guesty event occurs</label>
                         </div>
                         <span class="form-text text-muted">Select when the rule will be excecuted</span>
@@ -124,7 +124,7 @@
                 <div class="row">
                     <div class="form-group col-12 col-lg-4">
                         <label>Executes on</label>
-                        <select name="daysahead" id="daysahead" class="form-control form-control-solid">
+                        <select name="daysahead" id="daysahead" class="form-control form-control-solid @error('daysahead') is-invalid @enderror">
                             <option value="0" @if(!empty($rule) && $rule->daysahead == 0) selected @endif>Today</option>
                             <option value="1" @if(!empty($rule) && $rule->daysahead == 1) selected @endif>Tomorrw</option>
                             @for ($i = 2; $i <= 50; $i++)
@@ -134,53 +134,56 @@
                         <span class="form-text text-muted">Select when the change will be applied</span>
                     </div>
 
-                    <div class="form-group col-12 col-lg-4"  @if($rule->ishook) style="display:none;" @endif>
+                    <div class="form-group col-12 col-lg-4"  @if(!empty($rule) && $rule->ishook) style="display:none;" @endif>
+                        <input type="hidden" id="begin" name="begin" value="{{empty($rule) ? date("Y-m-d") : $rule->begin}}"/>
+                        <input type="hidden" id="ends" name="ends" value="{{empty($rule) ? date("Y-m-d") : $rule->ends}}"/>
                         <label>Date range</label>
                         <input id="daterange" type="text" data-date-format="yyyy-mm-dd" class="form-control form-control-solid " name="daterange" placeholder="Date range" required>
                         <span class="form-text text-muted">Select the dated when the rule will be execute</span>
                     </div>
-                    <div class="form-group col-12 col-lg-4" @if($rule->ishook) style="display:none;" @endif>
+                    <div class="form-group col-12 col-lg-4" @if(!empty($rule) && $rule->ishook) style="display:none;" @endif>
                         <label>Executes at</label>
                         <input id="time" type="text" class="form-control form-control-solid " name="time" placeholder="Executes at" required>
                         <span class="form-text text-muted">Select the time when the rule will be execute</span>
                     </div>
+
                     <div class="col-12">
                         <div class="form-group">
                             <div class="col-form-label">
                                 <label class="col-form-label">Day of the week</label>
                                 <div class="checkbox-inline">
                                     <label class="checkbox checkbox-primary">
-                                        <input type="checkbox" name="dayweek[]" value="1"/>
+                                        <input type="checkbox" name="dayweek[]" value="1" @if(!empty($rule->dayweek) && count($rule->dayweek) > 0  && in_array(1, $rule->dayweek)) checked="checked" @endif />
                                         <span></span>
                                         Maandag
                                     </label>
                                     <label class="checkbox checkbox-primary">
-                                        <input type="checkbox" name="dayweek[]" value="2"/>
+                                        <input type="checkbox" name="dayweek[]" value="2" @if(!empty($rule->dayweek) && count($rule->dayweek) > 0  && in_array(2, $rule->dayweek)) checked="checked" @endif/>
                                         <span></span>
                                         Dinsdag
                                     </label>
                                     <label class="checkbox checkbox-primary">
-                                        <input type="checkbox" name="dayweek[]" value="3"/>
+                                        <input type="checkbox" name="dayweek[]" value="3" @if(!empty($rule->dayweek) && count($rule->dayweek) > 0  && in_array(3, $rule->dayweek)) checked="checked" @endif/>
                                         <span></span>
                                         Woensdag
                                     </label>
                                     <label class="checkbox checkbox-primary">
-                                        <input type="checkbox" name="dayweek[]" value="4"/>
+                                        <input type="checkbox" name="dayweek[]" value="4" @if(!empty($rule->dayweek) && count($rule->dayweek) > 0  && in_array(4, $rule->dayweek)) checked="checked" @endif/>
                                         <span></span>
                                         Donderdag
                                     </label>
                                     <label class="checkbox checkbox-primary">
-                                        <input type="checkbox" name="dayweek[]" value="5"/>
+                                        <input type="checkbox" name="dayweek[]" value="5" @if(!empty($rule->dayweek) && count($rule->dayweek) > 0  && in_array(5, $rule->dayweek)) checked="checked" @endif/>
                                         <span></span>
                                         Vrijdag
                                     </label>
                                     <label class="checkbox checkbox-primary">
-                                        <input type="checkbox" name="dayweek[]" value="6"/>
+                                        <input type="checkbox" name="dayweek[]" value="6" @if(!empty($rule->dayweek) && count($rule->dayweek) > 0  && in_array(6, $rule->dayweek)) checked="checked" @endif/>
                                         <span></span>
                                         Zaterdag
                                     </label>
                                     <label class="checkbox checkbox-primary">
-                                        <input type="checkbox" name="dayweek[]" value="7"/>
+                                        <input type="checkbox" name="dayweek[]" value="0" @if(!empty($rule->dayweek) && count($rule->dayweek) > 0  && in_array(0, $rule->dayweek)) checked="checked" @endif/>
                                         <span></span>
                                             Zondag
                                     </label>

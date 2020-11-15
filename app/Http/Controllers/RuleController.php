@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Rule;
+use Carbon\Carbon;
 
 class RuleController extends Controller
 {
@@ -66,24 +67,9 @@ class RuleController extends Controller
     public function create(Request $request)
     {
         try {
-            // $data = $request->validate([
-            //     'name' => ['required', 'string', 'max:128'],
-            //     'details' => ['required', 'string', 'max:255'],
-            //     'time' => ['required', 'time'],
-            //     'active' => ['bool'],
-            //     'action' => ['string'],
-            //     'actionvalue' => ['string'],
-            //     'condition' => ['string'],
-            //     'conditionvalue' => ['string'],
-            //     'begin' => ['date'],
-            //     'ends' => ['date'],
-            //     'unit' => ['string'],
-            //     'daysahead' => ['int'],
-
-            //     'role' => ['required', "integer"]
-            // ]);
-
-            Rule::create($request->all());
+            $data = $request->validate($this->validatorArray());
+            $data['active'] = isset($data['active']);
+            Rule::create($data);
             flash(__("Success. Rule created."), 'success');
             return redirect(route('rule.index'));
         } catch (Exception $e) {
@@ -133,7 +119,9 @@ class RuleController extends Controller
     public function update(Request $request, Rule $rule)
     {
         try {
-            $rule->update($request->all());
+            $data = $request->validate($this->validatorArray());
+            $data['active'] = isset($data['active']);
+            $rule->update($data);
             flash(__("Success. Rule updated."), 'success');
             return redirect(route('rule.index'));
         } catch (Exception $e) {
@@ -141,5 +129,31 @@ class RuleController extends Controller
             flash($e->getMessage(), 'error');
             return back();
         }
+    }
+
+    /**
+     * Returns validator array for Rule Model
+     * @return mixed
+     */
+    private function validatorArray() {
+        return [
+            'active' => [''],
+            'name' => ['required', 'string', 'max:255'],
+            'details' => ['required', 'string', 'max:255'],
+            'priority' => ['required', 'int'],
+            'apartments' => [''],
+            'cond' => ['required','string'],
+            'conditionvalue' => ['required','int'],
+            'ishook' => ['int'],
+            'action' => ['string'],
+            'actionvalue' => ['required','int'],
+            'unit' => ['string'],
+            'daysahead' => ['int'],
+            'begin' => ['date'],
+            'ends' => ['date'],
+            'unit' => ['string'],
+            'time' => ['string'],
+            'dayweek' => ['']
+        ];
     }
 }

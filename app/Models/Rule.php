@@ -62,6 +62,18 @@ class Rule extends Model
     }
 
     public function getApartmentsAttribute() {
-        return json_decode($this->attributes['apartments']);
+        return !empty($this->attributes['apartments']) ? json_decode($this->attributes['apartments']) : [];
+    }
+
+    public function setApartmentsAttribute() {
+        return json_encode($this->attributes['apartments']);
+    }
+
+    public function getDayweekAttribute() {
+        return !empty($this->attributes['dayweek']) ? json_decode($this->attributes['dayweek']) : [];
+    }
+
+    public function setDayweekAttribute() {
+        return json_encode($this->attributes['dayweek']);
     }
 }
