@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
@@ -39,11 +39,11 @@ use App\Models;
  * @property float $saldo
  * @property Kasboek $kasboek
  */
-class KasboekOut extends Models
+class KasboekOut extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'kasboekout';
@@ -55,14 +55,14 @@ class KasboekOut extends Models
 
     /**
      * Indicates if the model should be timestamped.
-     * 
+     *
      * @var bool
      */
     public $timestamps = false;
 
     /**
      * The storage format of the model's date columns.
-     * 
+     *
      * @var string
      */
     protected $dateFormat = 'U';
