@@ -114,7 +114,6 @@ Route::name('help.')->middleware(['auth','web'])->prefix('help')->group(function
     Route::post('/update/{help}', 'HelpController@update')->name('update')->middleware('permission:configuration');
 });
 
-
 // Manage Parameters
 Route::name('parameters.')->middleware(['auth','web'])->prefix('parameters')->group(function () {
     Route::get('/', 'ParametersController@index')->name('index')->middleware('permission:configuration');
@@ -149,9 +148,8 @@ Route::name('blacklist.')->middleware(['auth','web'])->prefix('blacklist')->grou
 Route::name('pricing.')->middleware(['auth','web'])->prefix('pricing')->group(function () {
     Route::get('/', 'PricingController@index')->name('index')->middleware('permission:configuration');
     Route::post('/filter', 'PricingController@filter')->name('filter')->middleware('permission:configuration');
-    Route::post('/update', 'PricingController@update')->name('filter')->middleware('permission:configuration');
+    Route::post('/update', 'PricingController@update')->name('update')->middleware('permission:configuration');
 });
-
 
 // Manage Rule
 Route::name('rule.')->middleware(['auth','web'])->prefix('rule')->group(function () {
@@ -163,3 +161,5 @@ Route::name('rule.')->middleware(['auth','web'])->prefix('rule')->group(function
     Route::get('/edit/{rule}', 'RuleController@edit')->name('edit')->middleware('permission:configuration');
     Route::post('/update/{rule}', 'RuleController@update')->name('update')->middleware('permission:configuration');
 });
+
+
