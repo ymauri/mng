@@ -30,14 +30,7 @@ class ListingCalendar extends Model
     /**
      * @var array
      */
-    protected $fillable = ['idcalendar', 'price', 'checkin', 'listing', 'status', 'applied', 'reservation', 'newprice', 'created_at', 'upated_at', 'rule'];
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = false;
+    protected $fillable = ['idcalendar', 'price', 'checkin', 'listing', 'status', 'applied', 'reservation', 'newprice', 'rule', 'created_at', 'updated_at'];
 
     /**
      * The storage format of the model's date columns.
@@ -45,5 +38,9 @@ class ListingCalendar extends Model
      * @var string
      */
     protected $dateFormat = 'U';
+
+    public function getRuleAttribute() {
+        return !empty($this->attributes['rule']) ? json_decode($this->attributes['rule']) : [];
+    }
 
 }
