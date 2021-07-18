@@ -162,4 +162,9 @@ Route::name('rule.')->middleware(['auth','web'])->prefix('rule')->group(function
     Route::post('/update/{rule}', 'RuleController@update')->name('update')->middleware('permission:configuration');
 });
 
+// Manage Hotel form
+Route::name('hotel.')->middleware(['auth','web'])->prefix('hotel')->group(function () {
+    Route::get('/', 'HotelController@index')->name('index')->middleware('permission:hotel.list');
+    Route::post('/dt', 'HotelController@dt')->name('datatable')->middleware('permission:hotel.list');
+});
 

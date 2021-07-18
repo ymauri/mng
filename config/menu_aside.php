@@ -85,6 +85,24 @@ return [
             ]
         ],
 
+        // Forms
+        [
+            'title' => 'Forms',
+            'bullet' => 'line',
+            'root' => true,
+            'submenu' => [
+                [
+                    'title' => 'Hotel Kassa Cash & Log',
+                    'bullet' => 'dot',
+                    'page' => '/hotel'
+                ],
+                [
+                    'title' => 'Hotel Kasboek',
+                    'bullet' => 'dot',
+                    'page' => '/'
+                ]
+            ]
+        ],
         // [
         //     'title' => 'Pages',
         //     'icon' => 'media/svg/icons/Shopping/Barcode-read.svg',
