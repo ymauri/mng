@@ -9,11 +9,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $userdoor_id
  * @property int $card_id
  * @property int $bill_id
- * @property string $name
+ * @property string $verified
  * @property string $details
  * @property string $dated
- * @property string $updated
- * @property string $finished
+ * @property string $finished_at
  * @property float $totalover
  * @property float $totalvoldan
  * @property float $totaltoer
@@ -64,14 +63,14 @@ class Hotel extends Model
     /**
      * @var array
      */
-    protected $fillable = ['userdoor_id', 'card_id', 'bill_id', 'name', 'details', 'dated', 'updated', 'finished', 'totalover', 'totalvoldan', 'totaltoer', 'totalparking', 'totalextra', 'totaldag', 'totalont', 'totalparkingextra', 'totalcontanten', 'totaldebit', 'totalcredit', 'kasver', 'totalccv', 'tax', 'parking', 'nightslimit', 'totalborg', 'totalretourborg', 'saldoborg', 'ammountparking', 'longStay', 'stripeguesy', 'stripeinvoice', 'bank', 'airbnb', 'pin', 'credit', 'contant', 'overige', 'omzet'];
+    protected $fillable = ['userdoor_id', 'card_id', 'bill_id', 'verified', 'details', 'dated', 'finished_at', 'totalover', 'totalvoldan', 'totaltoer', 'totalparking', 'totalextra', 'totaldag', 'totalont', 'totalparkingextra', 'totalcontanten', 'totaldebit', 'totalcredit', 'kasver', 'totalccv', 'tax', 'parking', 'nightslimit', 'totalborg', 'totalretourborg', 'saldoborg', 'ammountparking', 'longStay', 'stripeguesy', 'stripeinvoice', 'bank', 'airbnb', 'pin', 'credit', 'contant', 'overige', 'omzet', 'websitemollie'];
 
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The storage format of the model's date columns.
